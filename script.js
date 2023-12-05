@@ -41,17 +41,21 @@ window.addEventListener('keydown', handleKey);
 // Hint: display: none; hides an element, and display: block; will bring it
 
 document.addEventListener("DOMContentLoaded", function () {
-    const defaultTabID = "#tab1";
-    document.querySelector(defaultTabID).style.display = "block";
-
-    document.querySelectorAll("#tabbed-layout a").forEach(function(tabLink) {
+    const tabContents = document.querySelectorAll(".tab-content");
+    tabContents.forEach(function (tabContent) {
+        tabContent.style.display = "none";
+    });
+    const tabLinks = document.querySelectorAll("#tabbed-layout ul li a");
+    tabLinks.forEach(function (tabLink) {
         tabLink.addEventListener("click", function (event) {
             event.preventDefault();
             const targetTabID = this.getAttribute("href").substr(1);
-            document.querySelectorAll(".tab-content").forEach(function(tabContent) {
+            tabContents.forEach(function (tabContent) {
                 tabContent.style.display = "none";
             });
             document.getElementById(targetTabID).style.display = "block";
         });
     });
+    const defaultTab = document.querySelector("#tab1");
+    defaultTab.style.display = "block";
 });
